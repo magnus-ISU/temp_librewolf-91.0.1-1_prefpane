@@ -174,6 +174,7 @@ fi
   git diff 1fee314adc81000294fc0cf3196a758e4b64dace > pref-panel.patch
   popd
   patch -Np1 -i /tmp/librewolf-TMP/pref-panel.patch
+  # patch settings patch
   rm -rf /tmp/librewolf-TMP
   git clone https://gitlab.com/magnustesshu/librewolf-patched-settings /tmp/librewolf-TMP
   pushd /tmp/librewolf-TMP

@@ -168,12 +168,19 @@ fi
   patch -Np1 -i ${_patches_dir}/mozilla_dirs.patch
 
   # pref panel patch
-  rm -rf /tmp/librewolf-pref-panel-TMP
-  git clone https://gitlab.com/ohfp/librewolf-pref-pane.git /tmp/librewolf-pref-panel-TMP
-  pushd /tmp/librewolf-pref-panel-TMP
+  rm -rf /tmp/librewolf-TMP
+  git clone https://gitlab.com/ohfp/librewolf-pref-pane.git /tmp/librewolf-TMP
+  pushd /tmp/librewolf-TMP
   git diff 1fee314adc81000294fc0cf3196a758e4b64dace > pref-panel.patch
   popd
-  patch -Np1 -i /tmp/librewolf-pref-panel-TMP/pref-panel.patch
+  patch -Np1 -i /tmp/librewolf-TMP/pref-panel.patch
+  rm -rf /tmp/librewolf-TMP
+  git clone https://gitlab.com/magnustesshu/librewolf-patched-settings /tmp/librewolf-TMP
+  pushd /tmp/librewolf-TMP
+  git diff 7319800dad64566d5cbd24bd6e4c87a4abbd9196 > fixed-settings.patch
+  popd
+  patch -Np1 -i /tmp/librewolf-TMP/fixed-settings.patch
+  rm -rf /tmp/librewolf-TMP
 
   rm -f ${srcdir}/common/source_files/mozconfig
   cp -r ${srcdir}/common/source_files/* ./

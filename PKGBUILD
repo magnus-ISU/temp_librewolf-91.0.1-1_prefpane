@@ -176,12 +176,12 @@ fi
   patch -Np1 -i /tmp/librewolf-TMP/pref-panel.patch
   # patch settings patch
   rm -rf /tmp/librewolf-TMP
-  git clone https://gitlab.com/magnustesshu/librewolf-patched-settings /tmp/librewolf-TMP
-  pushd /tmp/librewolf-TMP
-  git diff 7319800dad64566d5cbd24bd6e4c87a4abbd9196 > fixed-settings.patch
-  popd
-  patch -Np1 -i /tmp/librewolf-TMP/fixed-settings.patch
-  rm -rf /tmp/librewolf-TMP
+#  git clone https://gitlab.com/magnustesshu/librewolf-patched-settings /tmp/librewolf-TMP
+#  pushd /tmp/librewolf-TMP
+#  git diff 7319800dad64566d5cbd24bd6e4c87a4abbd9196 > fixed-settings.patch
+#  popd
+#  patch -Np1 -i /tmp/librewolf-TMP/fixed-settings.patch
+#  rm -rf /tmp/librewolf-TMP
 
   rm -f ${srcdir}/common/source_files/mozconfig
   cp -r ${srcdir}/common/source_files/* ./

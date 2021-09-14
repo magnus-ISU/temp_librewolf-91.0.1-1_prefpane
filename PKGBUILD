@@ -5,7 +5,7 @@
 
 pkgname=librewolf
 _pkgname=LibreWolf
-pkgver=91.0.1
+pkgver=92.0
 pkgrel=1
 pkgdesc="Community-maintained fork of Firefox, focused on privacy, security and freedom."
 arch=(x86_64 aarch64)
@@ -33,7 +33,7 @@ source=(https://archive.mozilla.org/pub/firefox/releases/$pkgver/source/firefox-
         "git+https://gitlab.com/${pkgname}-community/browser/common.git#tag=${_common_tag}"
         "git+https://gitlab.com/${pkgname}-community/settings.git#tag=${_settings_tag}")
 source_aarch64=("${pkgver}-${pkgrel}_build-arm-libopus.patch::https://raw.githubusercontent.com/archlinuxarm/PKGBUILDs/master/extra/firefox/build-arm-libopus.patch")
-sha256sums=('b95854ec9cb3e4409e5a1cf203c2b228146c6e3f9f3240d304cecec6b256f962'
+sha256sums=('299a472373021cc9194449c9f4bb962d5f74ef05e8af0448c589761ea34fbc84'
             '0b28ba4cc2538b7756cb38945230af52e8c4659b2006262da6f3352345a8bed2'
             'SKIP'
             'SKIP')
@@ -68,7 +68,7 @@ ac_add_options --with-branding=browser/branding/${pkgname}
 ac_add_options --with-distribution-id=io.gitlab.${pkgname}-community
 ac_add_options --with-unsigned-addon-scopes=app,system
 ac_add_options --allow-addon-sideload
-export MOZ_REQUIRE_SIGNING
+export MOZ_REQUIRE_SIGNING=
 
 # System libraries
 ac_add_options --with-system-nspr
@@ -109,7 +109,7 @@ END
   # we should have more than enough RAM on the CI spot instances.
   # ...or maybe not?
   export LDFLAGS+=" -Wl,--no-keep-memory"
-  patch -Np1 -i ${_patches_dir}/arm.patch
+  # patch -Np1 -i ${_patches_dir}/arm.patch # not required anymore?
   patch -Np1 -i ../${pkgver}-${pkgrel}_build-arm-libopus.patch
 
 else
@@ -164,7 +164,6 @@ fi
 
   # change some hardcoded directory strings that could lead to unnecessarily
   # created directories
-
   patch -Np1 -i ${_patches_dir}/mozilla_dirs.patch
 
   # pref panel patch
@@ -174,14 +173,7 @@ fi
   git diff 1fee314adc81000294fc0cf3196a758e4b64dace > pref-panel.patch
   popd
   patch -Np1 -i /tmp/librewolf-TMP/pref-panel.patch
-  # patch settings patch
   rm -rf /tmp/librewolf-TMP
-#  git clone https://gitlab.com/magnustesshu/librewolf-patched-settings /tmp/librewolf-TMP
-#  pushd /tmp/librewolf-TMP
-#  git diff 7319800dad64566d5cbd24bd6e4c87a4abbd9196 > fixed-settings.patch
-#  popd
-#  patch -Np1 -i /tmp/librewolf-TMP/fixed-settings.patch
-#  rm -rf /tmp/librewolf-TMP
 
   rm -f ${srcdir}/common/source_files/mozconfig
   cp -r ${srcdir}/common/source_files/* ./

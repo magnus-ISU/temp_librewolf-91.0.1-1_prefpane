@@ -31,8 +31,7 @@ install='librewolf.install'
 source=(https://archive.mozilla.org/pub/firefox/releases/$pkgver/source/firefox-$pkgver.source.tar.xz
         $pkgname.desktop
         "git+https://gitlab.com/${pkgname}-community/browser/common.git#tag=${_common_tag}"
-        "git+https://gitlab.com/${pkgname}-community/settings.git#tag=${_settings_tag}"
-        "0001-Use-remoting-name-for-GDK-application-names.patch::${_arch_git}/0001-Use-remoting-name-for-GDK-application-names.patch")
+        "git+https://gitlab.com/${pkgname}-community/settings.git#tag=${_settings_tag}")
 source_aarch64=("${pkgver}-${pkgrel}_build-arm-libopus.patch::https://raw.githubusercontent.com/archlinuxarm/PKGBUILDs/master/extra/firefox/build-arm-libopus.patch")
 sha256sums=('b7bb8c5fcc74a74e9d2b55d1e9415b891305fe86520fb854cec25024d7e5de67'
             '0b28ba4cc2538b7756cb38945230af52e8c4659b2006262da6f3352345a8bed2'
